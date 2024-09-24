@@ -21,7 +21,7 @@ interface coursedata {
 }
 
 const Courses = () => {
-  const { data, getData } = useGet(get_category, Config().headers);
+  const { data, getData } = useGet(get_category, Config());
 
   useEffect(() => {
     getData();

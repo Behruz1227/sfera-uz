@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePost } from '@/context/globalFunctions/usePostOption';
 import useMeeStore from '@/context/state-management/getMeeStore/getMeeStore';
 import { consoleClear } from '@/context/api/toastMessage';
-import { config } from '@/context/api/token';
+import { Config } from '@/context/api/token';
 import { File, FileAdd } from '@/context/api/api';
 
 interface ImageUploadProps {
@@ -15,7 +15,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ imgID }) => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [formData, setFormData] = useState<FormData | null>(null);
     const { setImgUpload } = useMeeStore();
-    const { loading: imgLoading, response: imgResponse, postData } = usePost(FileAdd, formData, config);
+    const { loading: imgLoading, response: imgResponse, postData } = usePost(FileAdd, formData, Config());
 
     useEffect(() => {
         if (imgResponse) {

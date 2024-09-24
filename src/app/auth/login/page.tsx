@@ -39,7 +39,7 @@ export default function SignupFormDemo() {
 
   const { data, getData } = useGet(
     get_mee,
-    Config().headers
+    Config()
   );
   const { setGetMeeData } = useMeeStore();
 
@@ -54,7 +54,7 @@ export default function SignupFormDemo() {
   }, [error]);
 
   useEffect(() => {
-    if (response) {
+    if (response && response.role === "ROLE_USER") {
       localStorage.clear();
       const expiryTime = new Date().getTime() + 24 * 60 * 60 * 1000;
       localStorage.setItem("tokenExpiry", expiryTime.toString());

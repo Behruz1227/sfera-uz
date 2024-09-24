@@ -4,8 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { bgColor, bgColorBody, TitleTextColor } from "../Colors";
 import { useRouter } from "next/navigation";
-import ModuleStore from "@/context/state-management/moduleStore/moduleStore";
+import { useInitializeModuleStore } from "@/context/state-management/moduleStore/moduleStore";
 import { CardContainer } from "./3d-card";
+import useModuleStore from "@/context/state-management/moduleStore/moduleStore";
 export const HoverEffect = ({
   items,
   className,
@@ -24,7 +25,8 @@ export const HoverEffect = ({
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const router = useRouter();
-  const { setCategoryId } = ModuleStore();
+  useInitializeModuleStore()
+  const { setCategoryId } = useModuleStore();
 
   const handleNavigation = (link: string, categoryid: string) => {
     const token = localStorage.getItem("token");

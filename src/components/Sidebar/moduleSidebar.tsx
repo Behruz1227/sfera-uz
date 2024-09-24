@@ -4,11 +4,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { RiArrowDropDownLine, RiDashboardHorizontalFill } from "react-icons/ri";
 import { cn } from "@/lib/utils";
 import { useLessonStore } from "@/context/state-management/lessonStore/lossonStore";
-import ModuleStore from "@/context/state-management/moduleStore/moduleStore";
+import { useInitializeModuleStore } from "@/context/state-management/moduleStore/moduleStore";
 import { FaLock } from "react-icons/fa";
 import { useGet } from "@/context/globalFunctions/useGetOption";
-import { config } from "@/context/api/token";
+import { Config } from "@/context/api/token";
 import { get_question } from "@/context/api/api";
+import useModuleStore from "@/context/state-management/moduleStore/moduleStore";
 
 export interface ModuleSidebarProps {
   modules: { moduleId: number; name: string; categoryId: number }[];
@@ -24,9 +25,10 @@ export interface ModuleSidebarProps {
 }
 
 const ModuleSidebar: React.FC<ModuleSidebarProps> = ({ modules, lessons }) => {
-  const { setVedioLink } = ModuleStore();
+  useInitializeModuleStore()
+  const { setVedioLink } = useModuleStore();
   const { setSelectedLessonId, selectedLessonId, setquestionData } = useLessonStore();
-  const { data, getData } = useGet(`${get_question}${selectedLessonId}`, config);
+  const { data, getData } = useGet(`${get_question}${selectedLessonId}`, Config());
   const [activeModule, setActiveModule] = useState<number | null>(null);
   const [initialLoadDone, setInitialLoadDone] = useState<boolean>(false);
 

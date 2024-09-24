@@ -1,3 +1,4 @@
+import { File } from "@/context/api/api";
 import { BackgroundBeamsWithCollision } from "../ui/background-beams-with-collision";
 import { HoverEffect } from "../ui/card-hover-effect";
 

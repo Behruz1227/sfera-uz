@@ -33,7 +33,7 @@ const slideData = [
 
 
 export default function Home() {
-  const { data, getData, loading, error } = useGet(getCategory, Config);
+  const { data, getData, loading, error } = useGet(getCategory, Config());
   const [queryClient] = useState(() => new QueryClient());
 
   useEffect(() => {

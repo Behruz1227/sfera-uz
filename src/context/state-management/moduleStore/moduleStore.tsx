@@ -1,10 +1,5 @@
 import { create } from 'zustand';
-
-const moduleData = localStorage.getItem('ModuleData')
-const categoryId = localStorage.getItem('CategoryId')
-const vedioLink = localStorage.getItem('VedioLink')
-const lessonId = localStorage.getItem('LessonId')
-
+import { useEffect } from 'react';
 
 // Define the type for the store's state
 interface ModuleState {
@@ -19,39 +14,58 @@ interface ModuleState {
 }
 
 // Create the store
-const ModuleStore = create<ModuleState>((set) => ({
-  ModuleData: moduleData || null, // Default to null if not set
+const useModuleStore = create<ModuleState>((set) => ({
+  ModuleData: null,
   setModuleData: (data) => {
     set({ ModuleData: data });
-    localStorage.setItem('ModuleData', data); // Store the value as a string
+    localStorage.setItem('ModuleData', JSON.stringify(data)); // Store as a string
   },
-  CategoryId: categoryId || null, // Default to null if not set
+  CategoryId: null,
   setCategoryId: (data) => {
     set({ CategoryId: data });
     if (data) {
-      localStorage.setItem('CategoryId', data); // Store the value as a string
+      localStorage.setItem('CategoryId', data); // Store as a string
     } else {
-      localStorage.removeItem('CategoryId'); // Remove the item if the value is null
+      localStorage.removeItem('CategoryId'); // Remove if null
     }
   },
-  VedioLink: vedioLink || null, // Default to null if not set
+  VedioLink: null,
   setVedioLink: (data) => {
     set({ VedioLink: data });
     if (data) {
-      localStorage.setItem('VedioLink', data); // Store the value as a string
+      localStorage.setItem('VedioLink', data); // Store as a string
     } else {
-      localStorage.removeItem('VedioLink'); // Remove the item if the value is null
+      localStorage.removeItem('VedioLink'); // Remove if null
     }
   },
-  LessonId: lessonId || null, // Default to null if not set
+  LessonId: null,
   setLessonId: (data) => {
     set({ LessonId: data });
     if (data) {
-      localStorage.setItem('LessonId', data); // Store the value as a string
+      localStorage.setItem('LessonId', data); // Store as a string
     } else {
-      localStorage.removeItem('LessonId'); // Remove the item if the value is null
+      localStorage.removeItem('LessonId'); // Remove if null
     }
   }
 }));
 
-export default ModuleStore;
+// Create a custom hook to initialize state from localStorage
+export const useInitializeModuleStore = () => {
+  const { setModuleData, setCategoryId, setVedioLink, setLessonId } = useModuleStore();
+
+  useEffect(() => {
+    const moduleData = localStorage.getItem('ModuleData');
+    const categoryId = localStorage.getItem('CategoryId');
+    const vedioLink = localStorage.getItem('VedioLink');
+    const lessonId = localStorage.getItem('LessonId');
+
+    if (moduleData) {
+      setModuleData(JSON.parse(moduleData));
+    }
+    setCategoryId(categoryId);
+    setVedioLink(vedioLink);
+    setLessonId(lessonId);
+  }, [setModuleData, setCategoryId, setVedioLink, setLessonId]);
+};
+
+export default useModuleStore;

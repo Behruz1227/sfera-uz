@@ -11,7 +11,7 @@ import { useEdit } from "@/context/globalFunctions/useEditOption";
 import { File, get_mee, Update_me } from "@/context/api/api";
 import toast from "react-hot-toast";
 import { Label } from "@radix-ui/react-label";
-import { config } from "@/context/api/token";
+import { Config } from "@/context/api/token";
 import ImageUpload from "@/components/imgUpload/imgUpload";
 import useMeeStore from "@/context/state-management/getMeeStore/getMeeStore";
 import {LabelInputContainer} from "@/components/Text/LabelInputContainer";
@@ -41,13 +41,13 @@ const Profile = () => {
       phoneNumber: `998${formData.phoneNumber}`,
       password: formData.password,
     },
-    config
+    Config()
   );
   const {
     getData,
     data: getResponse,
   } = useGet(
-    `${get_mee}`, config);
+    `${get_mee}`, Config());
 
   useEffect(() => {
     getData();

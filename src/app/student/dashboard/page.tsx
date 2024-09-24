@@ -6,17 +6,17 @@ import { HoverEffect } from "@/components/ui/card-hover-effect2";
 import { FaCode, FaCodeBranch, FaUserGraduate } from "react-icons/fa";
 import { bgColor, BorderColor } from "@/components/Colors";
 import { get_news, get_stats } from "@/context/api/api";
-import { config } from "@/context/api/token";
+import { Config } from "@/context/api/token";
 import { ThreeDCardDemo } from "@/components/ui/ThreeDCard";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import { LuBookCopy } from "react-icons/lu";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 const Dashboard = () => {
-  const { data, getData } = useGet(`${get_stats}`, config);
+  const { data, getData } = useGet(`${get_stats}`, Config());
   const { data: newsData, getData: getNewsData } = useGet(
     get_news,
-    config
+    Config()
   );
 
   useEffect(() => {

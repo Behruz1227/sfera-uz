@@ -1,11 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { toastMessage } from '../api/toastMessage';
-
-interface UseEditOptions<T> {
-  url: string;
-  data: T;
-}
 
 interface UseEditResponse<T> {
   loading: boolean;

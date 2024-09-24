@@ -10,7 +10,7 @@ interface UsePostResponse<T> {
   postData: () => void;
 }
 
-export function usePost<T>(url: string, data: T, config?: any): UsePostResponse<T> {
+export function usePost<T>(url: string, data: any, config?: any): UsePostResponse<T> {
   const mutation = useMutation({
     mutationFn: async () => {
       const result = await axios.post(url, data, config ? config : {});

@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 import SidebarDemo from "@/components/Sidebar/Sidebar";
 import { useGet } from "@/context/globalFunctions/useGetOption";
-import ModuleStore from "@/context/state-management/moduleStore/moduleStore";
+import { useInitializeModuleStore } from "@/context/state-management/moduleStore/moduleStore";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { bgColor, bgColorBody, BorderColor } from "@/components/Colors";
 import ModuleSidebar from "@/components/Sidebar/moduleSidebar";
 import VideoPlayer from "@/components/vedioJs/vedioJsProps";
-import { config } from "@/context/api/token";
+import { Config } from "@/context/api/token";
 import { get_lesson, get_module, post_question } from "@/context/api/api";
 import { useLessonStore } from "@/context/state-management/lessonStore/lossonStore";
 import { RadioGroup } from "@headlessui/react";
@@ -18,6 +18,7 @@ import {
 import { usePost } from "@/context/globalFunctions/usePostOption";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import toast from "react-hot-toast";
+import useModuleStore from "@/context/state-management/moduleStore/moduleStore";
 
 interface lessondata {
   moduleId: number | string | null,
@@ -49,7 +50,8 @@ interface optiondata {
 
 
 const Module = () => {
-  const { CategoryId, VedioLink } = ModuleStore();
+  useInitializeModuleStore()
+  const { CategoryId, VedioLink } = useModuleStore();
   const {
     questionData,
     setNextLessonId,
@@ -62,17 +64,17 @@ const Module = () => {
 
   const { data, getData } = useGet(
     `${get_module}${CategoryId}`,
-    config
+    Config()
   );
   const { error: questionError, loading: postLoading, postData, response: questionResponse } = usePost(
     `${post_question}${currentLessonId}?nextLessonId=${nextLessonId}`,
     result,
-    config
+    Config()
   );
   const {
     data: lessonData,
     getData: getLesson,
-  } = useGet(`${get_lesson}${CategoryId}`, config);
+  } = useGet(`${get_lesson}${CategoryId}`, Config());
 
   const [selectedAnswers, setSelectedAnswers] = useState<{
     [key: number]: number;
