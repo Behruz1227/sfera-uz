@@ -148,7 +148,6 @@ const Module = () => {
         }
     };
 
-    console.log(lessons)
     return (
         <SidebarDemo>
             <title>Sfera uz | Modul</title>
@@ -163,14 +162,11 @@ const Module = () => {
                 {data ? (
                     <div className="flex w-full justify-between">
                         <div className="flex flex-col w-full lg:mr-[277px] p-2 md:px-10">
-                            {/* Video Player */}
-                            <VideoPlayer
-                                videoId={
-                                    VedioLink
-                                        ? "VedioLink"
-                                        : "eMQGZHOcw2U"
-                                }
-                            />
+                            {VedioLink ? <VideoPlayer videoId={VedioLink}/> : <>
+                                <p className={`text-center font-semibold text-xl mb-10`}>
+                                    Bu yo&apos;nalish buyicha video topilmadi
+                                </p>
+                            </>}
                             <div className={`mt-4 p-4 bg-[${bgColor}] rounded-md`}>
                                 {questionData?.length > 0 ? (
                                     <div>

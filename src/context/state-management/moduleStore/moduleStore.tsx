@@ -32,11 +32,11 @@ const useModuleStore = create<ModuleState>((set) => ({
   VedioLink: null,
   setVedioLink: (data) => {
     set({ VedioLink: data });
-    if (data) {
-      localStorage.setItem('VedioLink', data); // Store as a string
-    } else {
-      localStorage.removeItem('VedioLink'); // Remove if null
-    }
+    // if (data) {
+    //   localStorage.setItem('VedioLink', data); // Store as a string
+    // } else {
+    //   localStorage.removeItem('VedioLink'); // Remove if null
+    // }
   },
   LessonId: null,
   setLessonId: (data) => {
@@ -56,14 +56,14 @@ export const useInitializeModuleStore = () => {
   useEffect(() => {
     const moduleData = localStorage.getItem('ModuleData');
     const categoryId = localStorage.getItem('CategoryId');
-    const vedioLink = localStorage.getItem('VedioLink');
+    // const vedioLink = localStorage.getItem('VedioLink');
     const lessonId = localStorage.getItem('LessonId');
 
     if (moduleData) {
       setModuleData(JSON.parse(moduleData));
     }
     setCategoryId(categoryId);
-    setVedioLink(vedioLink);
+    // setVedioLink(vedioLink);
     setLessonId(lessonId);
   }, [setModuleData, setCategoryId, setVedioLink, setLessonId]);
 };
