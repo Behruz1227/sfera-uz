@@ -4,7 +4,7 @@ import {Label} from "@radix-ui/react-label";
 import {Input} from "@/components/ui/input";
 import {cn} from "@/lib/utils";
 import {BackgroundLines} from "@/components/ui/background-lines";
-import {FaEye, FaEyeSlash} from "react-icons/fa"; // Importing icons from react-icons/fa
+import {FaEye, FaEyeSlash} from "react-icons/fa";
 import {usePost} from "@/context/globalFunctions/usePostOption";
 import {BASE_URL, get_mee} from "@/context/api/api";
 import HeaderTitles from "@/components/Text/HeadText";
@@ -37,10 +37,7 @@ export default function SignupFormDemo() {
         }
     );
 
-    const {data, getData} = useGet(
-        get_mee,
-        Config()
-    );
+    const {data, getData} = useGet(get_mee, Config());
     const {setGetMeeData} = useMeeStore();
 
     useEffect(() => {
@@ -48,9 +45,7 @@ export default function SignupFormDemo() {
     }, [data]);
 
     useEffect(() => {
-        if (error) {
-            toast.error(error?.message);
-        }
+        if (error) toast.error(error?.message);
     }, [error]);
 
     useEffect(() => {
@@ -61,7 +56,7 @@ export default function SignupFormDemo() {
             localStorage.setItem("token", response?.token);
             localStorage.setItem("role", response?.role);
             getData();
-            toast.success("Siz tizimga kirdingiz!");
+            toast.success("Tizimga muvaffaqiyatli kirdingiz!");
             router.push("/student/dashboard");
         } else toast.error('Sizga kirish uchun ruxsat berilmagan')
     }, [response?.role, response?.token]);
