@@ -1,10 +1,11 @@
 "use client"; // This file will now be a client component
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
+import React, {useEffect, useState} from "react";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import {siteSecurity} from "@/components/secure";
 
 // Load your custom fonts
 const geistSans = localFont({
@@ -24,8 +25,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Initialize a QueryClient
   const [queryClient] = useState(() => new QueryClient());
+  useEffect(() => {
+    // siteSecurity()
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

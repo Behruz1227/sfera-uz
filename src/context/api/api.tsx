@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://142.93.106.195:8080/'
+export const BASE_URL = 'https://online.sferaedu.uz/'
 export const Regester = `${BASE_URL}auth/register`
 export const Update_me = `${BASE_URL}user`
 export const get_category = `${BASE_URL}category/list?categoryEnum=ONLINE`
