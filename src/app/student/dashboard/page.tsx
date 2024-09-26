@@ -20,7 +20,7 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
-    getData();
+    // getData();
     getNewsData();
   }, []);
 
@@ -75,9 +75,9 @@ const Dashboard = () => {
           textclassName="tracking-wider"
         />
 
-        <div className="relative z-10 flex flex-wrap justify-center gap-4">
+        {/* <div className="relative z-10 flex flex-wrap justify-center gap-4">
           <HoverEffect items={CardsMap ? CardsMap : []} />
-        </div>
+        </div> */}
         <div
           className={`flex justify-center items-center text-[${BorderColor}] pb-12`}
         >
