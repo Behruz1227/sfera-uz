@@ -39,7 +39,7 @@ const Courses = () => {
   return (
     <SidebarDemo>
       <title>Sfera uz | Kurslar</title>
-      <div className={`relative ${CardsMap ? "p-2 md:p-10" : ""} w-full min-h-screen overflow-y-auto dark:bg-black bg-[${bgColorBody}] dark:bg-dot-white/[0.2] bg-dot-black/[0.3]`}>
+      <div className={`relative ${CardsMap && CardsMap.length > 0 ? "p-2 md:p-10 overflow-y-auto" : "p-2 md:p-10 overflow-hidden"} w-full min-h-screen  dark:bg-black bg-[${bgColorBody}] dark:bg-dot-white/[0.2] bg-dot-black/[0.3]`}>
       <Breadcrumbs
           text="Kurslar"
           className=""
@@ -48,12 +48,12 @@ const Courses = () => {
         {/* Radial gradient for the container to give a faded look */}
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-[${bgColorBody}] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
-        {CardsMap ? (
+        {CardsMap && CardsMap.length >  0 ? (
           <div className="relative z-10 flex flex-wrap justify-center gap-4 mb-10">
-            <HoverEffect items={CardsMap ? CardsMap : null} />
+            <HoverEffect items={CardsMap} />
           </div>
         ) : (
-          <div className={`h-screen relative w-full flex flex-col items-center justify-center overflow-hidden rounded-md`}>
+          <div className={` w-full h-full flex flex-col items-center justify-center overflow-hidden`}>
             <div className="w-full absolute inset-0 h-screen">
               <SparklesCore
                 id="tsparticlesfullpage"
@@ -65,7 +65,7 @@ const Courses = () => {
                 particleColor="#000"
               />
             </div>
-            <h1 className={`md:text-7xl text-3xl bg-transparent lg:text-6xl font-bold text-center text-[#000] relative z-20`}>
+            <h1 className={` text-xl bg-transparent font-bold text-center text-[#000] relative z-20`}>
               Kurslar topilmadi☹
             </h1>
           </div>

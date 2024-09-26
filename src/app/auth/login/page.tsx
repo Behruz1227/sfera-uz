@@ -45,7 +45,7 @@ export default function SignupFormDemo() {
     }, [data]);
 
     useEffect(() => {
-        if (error) toast.error(error?.message);
+        if (error) toast.error("Telefon raqam yoki parol xato!");
     }, [error]);
 
     useEffect(() => {
@@ -56,8 +56,8 @@ export default function SignupFormDemo() {
             localStorage.setItem("token", response?.token);
             localStorage.setItem("role", response?.role);
             getData();
-            toast.success("Tizimga muvaffaqiyatli kirdingiz!");
             router.push("/student/dashboard");
+            toast.success("Tizimga muvaffaqiyatli kirdingiz!");
         } else toast.error('Sizga kirish uchun ruxsat berilmagan')
     }, [response?.role, response?.token]);
 

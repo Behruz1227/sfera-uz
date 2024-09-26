@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
 import { BackgroundLines } from "@/components/ui/background-lines";
@@ -31,12 +31,20 @@ export default function Signup() {
     passwordError: "",
     confirmPasswordError: "",
   });
-  const { loading, postData, response } = usePost(`${Regester}`, {
+  const { loading, postData, response, error } = usePost(`${Regester}`, {
     lastName: formData.lastName,
     firstName: formData.firstName,
     phoneNumber: `998${formData.phoneNumber}`,
     password: formData.password,
   });
+
+  useEffect(() => {
+    if (response) {
+      toast.success("Registered successfully");
+      router.push("/auth/login");
+    }
+    error && toast.error("Registered failed");
+  }, [response, error]);
 
   const router = useRouter();
 
@@ -109,8 +117,6 @@ export default function Signup() {
     ) {
       try {
         await postData();
-        response && toast.success("Registered successfully");
-        router.push("/auth/login");
         setFormData({
           phoneNumber: "",
           lastName: "",
@@ -139,7 +145,7 @@ export default function Signup() {
     <BackgroundLines className="flex items-center justify-center w-full flex-col px-4">
       <BackgroundGradient className=" overflow-hidden rounded-none md:rounded-2xl dark:bg-zinc-900">
         <div
-          className={`lg:min-w-[500px] w-[300px] mx-auto p-4 md:p-8 pb-0 shadow-input bg-[${bgColor}] dark:bg-black z-10`}
+          className={`max-w-md w-full rounded-2xl mx-auto p-4 md:p-8 shadow-input bg-[${bgColor}] dark:bg-black z-10`}
         >
           <div className="w-full flex items-center justify-center mb-6">
             <Image alt="." src={Images.Logo} width={150} />
@@ -148,7 +154,7 @@ export default function Signup() {
             Create your account
           </h1>
           <div className="my-8">
-            <div className="flex">
+            <div className="flex flex-col sm:flex-row">
               <LabelInputContainer className="md:mb-4 mb-2">
                 <Label className="text-white font-semibold" htmlFor="firstName">
                   First Name
