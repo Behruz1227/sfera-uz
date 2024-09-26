@@ -30,7 +30,8 @@ export default function RootLayout({
   const pathname = usePathname()
   const router = useRouter()
   useEffect(() => {
-    siteSecurity()
+    // siteSecurity()
+    
   }, []);
   useEffect(() => {
     if (!sessionStorage.getItem("token") && pathname !== "/auth/login") {
