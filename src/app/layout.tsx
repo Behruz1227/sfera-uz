@@ -33,7 +33,7 @@ export default function RootLayout({
     // siteSecurity()
   }, []);
   useEffect(() => {
-    if (!sessionStorage.getItem("token")) {
+    if (!sessionStorage.getItem("token") || pathname !== "/auth/login") {
       router.push("/")
     }
   }, [pathname]);
