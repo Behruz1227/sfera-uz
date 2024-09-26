@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   const [queryClient] = useState(() => new QueryClient());
   useEffect(() => {
-    // siteSecurity()
+    siteSecurity()
   }, []);
 
   return (

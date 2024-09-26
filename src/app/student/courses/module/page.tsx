@@ -150,7 +150,7 @@ const Module = () => {
       await postData();
 
       // Step 6: Reset selected answers after finishing the test
-      setSelectedAnswers({}); // This will clear the selected answers
+      
     } catch (error) {
       // console.error("Error finishing the test:", error);
     }

@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Label} from "@radix-ui/react-label";
 import {Input} from "@/components/ui/input";
 import {cn} from "@/lib/utils";
@@ -49,7 +49,7 @@ export default function SignupFormDemo() {
     }, [error]);
 
     useEffect(() => {
-        if (response && (response.role === "ROLE_USER" || response.role === "ROLE_STUDENT")) {
+        if (response && response?.token && response?.role && (response.role === "ROLE_USER" || response.role === "ROLE_STUDENT")) {
             localStorage.clear();
             const expiryTime = new Date().getTime() + 24 * 60 * 60 * 1000;
             localStorage.setItem("tokenExpiry", expiryTime.toString());
@@ -59,7 +59,7 @@ export default function SignupFormDemo() {
             router.push("/student/dashboard");
             toast.success("Tizimga muvaffaqiyatli kirdingiz!");
         } else toast.error('Sizga kirish uchun ruxsat berilmagan')
-    }, [response?.role, response?.token]);
+    }, [ response?.token]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {id, value} = e.target;
