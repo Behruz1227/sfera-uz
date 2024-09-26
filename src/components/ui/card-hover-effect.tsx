@@ -29,7 +29,7 @@ export const HoverEffect = ({
   const { setCategoryId } = useModuleStore();
 
   const handleNavigation = (link: string, categoryid: string) => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (token) {
       router.push(fallbackUrl || link);
       setCategoryId(categoryid);

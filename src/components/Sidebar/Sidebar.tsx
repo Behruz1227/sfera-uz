@@ -68,7 +68,7 @@ export default function SidebarDemo({
               {links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} onClick={() => {
                   if (link.label === "Logout") {
-                    localStorage.clear()
+                    sessionStorage.clear()
                     route.push("/auth/login")
                   }
                 }} />

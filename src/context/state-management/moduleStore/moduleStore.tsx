@@ -18,53 +18,53 @@ const useModuleStore = create<ModuleState>((set) => ({
   ModuleData: null,
   setModuleData: (data) => {
     set({ ModuleData: data });
-    localStorage.setItem('ModuleData', JSON.stringify(data)); // Store as a string
+    sessionStorage.setItem('ModuleData', JSON.stringify(data)); // Store as a string
   },
   CategoryId: null,
   setCategoryId: (data) => {
     set({ CategoryId: data });
     if (data) {
-      localStorage.setItem('CategoryId', data); // Store as a string
+      sessionStorage.setItem('CategoryId', data); // Store as a string
     } else {
-      localStorage.removeItem('CategoryId'); // Remove if null
+      sessionStorage.removeItem('CategoryId'); // Remove if null
     }
   },
   VedioLink: null,
   setVedioLink: (data) => {
     set({ VedioLink: data });
     // if (data) {
-    //   localStorage.setItem('VedioLink', data); // Store as a string
+    //   sessionStorage.setItem('VedioLink', data); // Store as a string
     // } else {
-    //   localStorage.removeItem('VedioLink'); // Remove if null
+    //   sessionStorage.removeItem('VedioLink'); // Remove if null
     // }
   },
   LessonId: null,
   setLessonId: (data) => {
     set({ LessonId: data });
     if (data) {
-      localStorage.setItem('LessonId', data); // Store as a string
+      sessionStorage.setItem('LessonId', data); // Store as a string
     } else {
-      localStorage.removeItem('LessonId'); // Remove if null
+      sessionStorage.removeItem('LessonId'); // Remove if null
     }
   }
 }));
 
-// Create a custom hook to initialize state from localStorage
+// Create a custom hook to initialize state from sessionStorage
 export const useInitializeModuleStore = () => {
   const { setModuleData, setCategoryId, setVedioLink, setLessonId } = useModuleStore();
 
   useEffect(() => {
-    const moduleData = localStorage.getItem('ModuleData');
-    const categoryId = localStorage.getItem('CategoryId');
-    // const vedioLink = localStorage.getItem('VedioLink');
-    const lessonId = localStorage.getItem('LessonId');
+    const moduleData = sessionStorage.getItem('ModuleData');
+    const categoryId = sessionStorage.getItem('CategoryId');
+    // const vedioLink = sessionStorage.getItem('VedioLink');
+    const lessonId = sessionStorage.getItem('LessonId');
 
-    if (moduleData) {
-      setModuleData(JSON.parse(moduleData));
-    }
     setCategoryId(categoryId);
     // setVedioLink(vedioLink);
     setLessonId(lessonId);
+    if (moduleData) {
+      setModuleData(JSON.parse(moduleData));
+    }
   }, [setModuleData, setCategoryId, setVedioLink, setLessonId]);
 };
 

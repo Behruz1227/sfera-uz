@@ -50,11 +50,11 @@ export default function SignupFormDemo() {
 
     useEffect(() => {
         if (response && response?.token && response?.role && (response.role === "ROLE_USER" || response.role === "ROLE_STUDENT")) {
-            localStorage.clear();
+            sessionStorage.clear();
             const expiryTime = new Date().getTime() + 24 * 60 * 60 * 1000;
-            localStorage.setItem("tokenExpiry", expiryTime.toString());
-            localStorage.setItem("token", response?.token);
-            localStorage.setItem("role", response?.role);
+            sessionStorage.setItem("tokenExpiry", expiryTime.toString());
+            sessionStorage.setItem("token", response?.token);
+            sessionStorage.setItem("role", response?.role);
             getData();
             router.push("/student/dashboard");
             toast.success("Tizimga muvaffaqiyatli kirdingiz!");

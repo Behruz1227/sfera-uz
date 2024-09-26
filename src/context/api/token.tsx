@@ -1,7 +1,7 @@
 // Function to dynamically generate the config with authorization header
 export const Config = () => {
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     return {
       headers: {
         Authorization: `Bearer ${token || ""}`, // Safeguard if token is null
@@ -19,7 +19,7 @@ export const Config = () => {
 // Function to dynamically generate the image config with authorization header
 export const ImgConfig = () => {
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     return {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -40,7 +40,7 @@ export const ImgConfig = () => {
 export const setConfig = () => {
   const config = Config();
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     config.headers.Authorization = `Bearer ${token || ""}`; // Update the token dynamically
   }
   return config;
@@ -49,7 +49,7 @@ export const setConfig = () => {
 export const setImgConfig = () => {
   const imgConfig = ImgConfig();
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     imgConfig.headers.Authorization = `Bearer ${token || ""}`; // Update the token dynamically
   }
   return imgConfig;

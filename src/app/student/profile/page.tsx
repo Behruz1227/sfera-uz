@@ -59,9 +59,9 @@ const Profile = () => {
       if (response) {
         // Promise ni async ichida to'g'ridan-to'g'ri ishlatish
         await new Promise((res) => {
-          localStorage.clear();
-          localStorage.setItem("token", response?.token);
-          localStorage.setItem("role", response?.role);
+          sessionStorage.clear();
+          sessionStorage.setItem("token", response?.token);
+          sessionStorage.setItem("role", response?.role);
           res("salom"); // Promise'ni hal qilish
         });
 

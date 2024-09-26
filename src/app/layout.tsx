@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import {siteSecurity} from "@/components/secure";
+import { usePathname, useRouter } from "next/navigation";
 
 // Load your custom fonts
 const geistSans = localFont({
@@ -26,9 +27,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [queryClient] = useState(() => new QueryClient());
+  const pathname = usePathname()
+  const router = useRouter()
   useEffect(() => {
-    siteSecurity()
+    // siteSecurity()
   }, []);
+  useEffect(() => {
+    if (!sessionStorage.getItem("token")) {
+      router.push("/")
+    }
+  }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
