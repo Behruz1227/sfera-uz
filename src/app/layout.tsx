@@ -34,8 +34,10 @@ export default function RootLayout({
 
   }, []);
   useEffect(() => {
-    if (!sessionStorage.getItem("token") && pathname !== "/auth/login" || pathname !== "/auth/signup") {
-      router.push("/")
+    if (!sessionStorage.getItem("token")) {
+      if (pathname !== "/auth/login" && pathname !== "/auth/signup") {
+        router.push("/")
+      }
     }
   }, [pathname]);
 
